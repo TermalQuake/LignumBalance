@@ -1,0 +1,8 @@
+name: LignumBalance
+version: '${project.version}'
+main: me.lignumbalance.main
+api-version: 1.19
+authors: [TermalQuake]
+description: Reworked minecraft Balance
+website: lignum.su
+
