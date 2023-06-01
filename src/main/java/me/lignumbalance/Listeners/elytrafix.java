@@ -49,7 +49,7 @@ public class elytrafix implements Listener {
             event.setDroppedExp(500);
         }
     }
-//улучшение фейверка
+    //Создание кастомной прокачки мощьности фейверка
     @EventHandler
     public void onAnvilUse(final PrepareAnvilEvent event) {
         final ItemStack firstItem = event.getInventory().getItem(0);
@@ -58,15 +58,18 @@ public class elytrafix implements Listener {
             return;
         }
         if (firstItem.getType() == Material.FIREWORK_ROCKET && firstItem.hasItemMeta() && firstItem.getItemMeta().hasLore() && firstItem.getItemMeta().getLore().contains("123") && secondItem.getType() == Material.DIAMOND_BLOCK) {
-            final ItemStack result = new ItemStack(Material.FIREWORK_ROCKET, 1);
-            final ItemMeta meta = result.getItemMeta();
+            int firstItemCount = firstItem.getAmount(); // Получаем количество первоначального предмета
+            final ItemStack result = new ItemStack(Material.FIREWORK_ROCKET, firstItemCount); // Создаем новый предмет с количеством, равным количеству первоначального предмета
+            final FireworkMeta fireworkMeta = (FireworkMeta) result.getItemMeta(); // Получаем метаданные предмета в виде FireworkMeta
+            fireworkMeta.setPower(2); // Устанавливаем мощность фейерверка
             List<String> lore = new ArrayList<>();
             lore.add("456");
-            meta.setLore(lore);
-            meta.setCustomModelData(100);
-            result.setItemMeta(meta);
+            fireworkMeta.setLore(lore);
+            fireworkMeta.setCustomModelData(100);
+            result.setItemMeta(fireworkMeta); // Устанавливаем метаданные предмета
             event.setResult(result);
-            event.getInventory().setRepairCost(1); // Установка стоимости ремонта
+            int repairCost = 10 * firstItemCount; // Устанавливаем стоимость ремонта, зависящую от количества первоначального предмета
+            event.getInventory().setRepairCost(repairCost);
         }
     }
 }
