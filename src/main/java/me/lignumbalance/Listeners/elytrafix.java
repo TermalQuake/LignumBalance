@@ -20,22 +20,7 @@ import java.util.List;
 
 
 public class elytrafix implements Listener {
-    @EventHandler
-    public void onPlayerInteract(PlayerInteractEvent event) {
-        ItemStack item = event.getItem();
-        if (item != null && item.getType() == Material.FIREWORK_ROCKET && item.hasItemMeta()) {
-            ItemMeta meta = item.getItemMeta();
-            if (event.getAction() == Action.RIGHT_CLICK_AIR && event.getPlayer().isGliding()) {
-                if (meta.hasLore() && meta.getLore().contains("123")) { // изменить лор надо
-                    event.setCancelled(false);
-                    event.getPlayer().sendMessage(ChatColor.GREEN + "можно летать");
-                } else {
-                    event.setCancelled(true);
-                    event.getPlayer().sendMessage(ChatColor.RED + "нельзя летать");
-                }
-            }
-        }
-    }
+    //Дроп с дракона
     @EventHandler
     public void onEntityDeath(EntityDeathEvent event) {
         if (event.getEntity() instanceof EnderDragon) {
@@ -52,7 +37,32 @@ public class elytrafix implements Listener {
             event.setDroppedExp(500);
         }
     }
-//Фейверки
+    //Фейверки
+    // возможность летать
+    @EventHandler
+    public void onPlayerInteract(PlayerInteractEvent event) {
+        ItemStack item = event.getItem();
+        if (item != null && item.getType() == Material.FIREWORK_ROCKET && item.hasItemMeta()) {
+            ItemMeta meta = item.getItemMeta();
+            if (event.getAction() == Action.RIGHT_CLICK_AIR && event.getPlayer().isGliding()) {
+                if (meta.hasLore()) {
+                    List<String> lore = meta.getLore();
+                    if (lore.contains("1") || lore.contains("2") || lore.contains("3")) {
+                        event.setCancelled(false);
+                        event.getPlayer().sendMessage(ChatColor.GREEN + "можно летать");
+                    } else {
+                        event.setCancelled(true);
+                        event.getPlayer().sendMessage(ChatColor.RED + "нельзя летать");
+                    }
+                } else {
+                    event.setCancelled(true);
+                    event.getPlayer().sendMessage(ChatColor.RED + "нельзя летать");
+                }
+            }
+        }
+    }
+
+    //система прокачки 1
     @EventHandler
     public void onAnvilUse1(final PrepareAnvilEvent event) {
         final ItemStack firstItem = event.getInventory().getItem(0);
@@ -75,6 +85,7 @@ public class elytrafix implements Listener {
             event.getInventory().setRepairCost(repairCost);
         }
     }
+    //система прокачки 2
     @EventHandler
     public void onAnvilUse2(final PrepareAnvilEvent event) {
         final ItemStack firstItem = event.getInventory().getItem(0);
