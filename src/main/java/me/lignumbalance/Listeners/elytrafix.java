@@ -1,20 +1,23 @@
 package me.lignumbalance.Listeners;
 
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EnderDragon;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.inventory.PrepareAnvilEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
+import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.Material;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class elytrafix implements Listener {
     @EventHandler
@@ -49,21 +52,43 @@ public class elytrafix implements Listener {
             event.setDroppedExp(500);
         }
     }
-    //Создание кастомной прокачки мощьности фейверка
+//Фейверки
     @EventHandler
-    public void onAnvilUse(final PrepareAnvilEvent event) {
+    public void onAnvilUse1(final PrepareAnvilEvent event) {
         final ItemStack firstItem = event.getInventory().getItem(0);
         final ItemStack secondItem = event.getInventory().getItem(1);
         if (firstItem == null || secondItem == null) {
             return;
         }
-        if (firstItem.getType() == Material.FIREWORK_ROCKET && firstItem.hasItemMeta() && firstItem.getItemMeta().hasLore() && firstItem.getItemMeta().getLore().contains("123") && secondItem.getType() == Material.DIAMOND_BLOCK) {
+        if (firstItem.getType() == Material.FIREWORK_ROCKET && firstItem.hasItemMeta() && firstItem.getItemMeta().hasLore() && firstItem.getItemMeta().getLore().contains("1") && secondItem.getType() == Material.BLAZE_POWDER) {
             int firstItemCount = firstItem.getAmount(); // Получаем количество первоначального предмета
             final ItemStack result = new ItemStack(Material.FIREWORK_ROCKET, firstItemCount); // Создаем новый предмет с количеством, равным количеству первоначального предмета
             final FireworkMeta fireworkMeta = (FireworkMeta) result.getItemMeta(); // Получаем метаданные предмета в виде FireworkMeta
             fireworkMeta.setPower(2); // Устанавливаем мощность фейерверка
             List<String> lore = new ArrayList<>();
-            lore.add("456");
+            lore.add("2");
+            fireworkMeta.setLore(lore);
+            fireworkMeta.setCustomModelData(100);
+            result.setItemMeta(fireworkMeta); // Устанавливаем метаданные предмета
+            event.setResult(result);
+            int repairCost = 10 * firstItemCount; // Устанавливаем стоимость ремонта, зависящую от количества первоначального предмета
+            event.getInventory().setRepairCost(repairCost);
+        }
+    }
+    @EventHandler
+    public void onAnvilUse2(final PrepareAnvilEvent event) {
+        final ItemStack firstItem = event.getInventory().getItem(0);
+        final ItemStack secondItem = event.getInventory().getItem(1);
+        if (firstItem == null || secondItem == null) {
+            return;
+        }
+        if (firstItem.getType() == Material.FIREWORK_ROCKET && firstItem.hasItemMeta() && firstItem.getItemMeta().hasLore() && firstItem.getItemMeta().getLore().contains("2") && secondItem.getType() == Material.FIRE_CHARGE) {
+            int firstItemCount = firstItem.getAmount(); // Получаем количество первоначального предмета
+            final ItemStack result = new ItemStack(Material.FIREWORK_ROCKET, firstItemCount); // Создаем новый предмет с количеством, равным количеству первоначального предмета
+            final FireworkMeta fireworkMeta = (FireworkMeta) result.getItemMeta(); // Получаем метаданные предмета в виде FireworkMeta
+            fireworkMeta.setPower(3); // Устанавливаем мощность фейерверка
+            List<String> lore = new ArrayList<>();
+            lore.add("3");
             fireworkMeta.setLore(lore);
             fireworkMeta.setCustomModelData(100);
             result.setItemMeta(fireworkMeta); // Устанавливаем метаданные предмета
@@ -73,3 +98,4 @@ public class elytrafix implements Listener {
         }
     }
 }
+
