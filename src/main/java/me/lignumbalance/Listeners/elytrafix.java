@@ -57,14 +57,16 @@ public class elytrafix implements Listener {
         if (firstItem == null || secondItem == null) {
             return;
         }
-        if (firstItem.getType() == Material.FIREWORK_ROCKET && firstItem.hasItemMeta() && firstItem.getItemMeta().hasLore() && firstItem.getItemMeta().getLore() != null && firstItem.getItemMeta().getLore().contains("123") && secondItem.getType() == Material.DIAMOND_BLOCK) {
+        if (firstItem.getType() == Material.FIREWORK_ROCKET && firstItem.hasItemMeta() && firstItem.getItemMeta().hasLore() && firstItem.getItemMeta().getLore().contains("123") && secondItem.getType() == Material.DIAMOND_BLOCK) {
             final ItemStack result = new ItemStack(Material.FIREWORK_ROCKET, 1);
             final ItemMeta meta = result.getItemMeta();
             List<String> lore = new ArrayList<>();
             lore.add("456");
             meta.setLore(lore);
+            meta.setCustomModelData(100);
             result.setItemMeta(meta);
             event.setResult(result);
+            event.getInventory().setRepairCost(1); // Установка стоимости ремонта
         }
     }
 }
