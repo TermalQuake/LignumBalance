@@ -49,4 +49,22 @@ public class elytrafix implements Listener {
             event.setDroppedExp(500);
         }
     }
+//улучшение фейверка
+    @EventHandler
+    public void onAnvilUse(final PrepareAnvilEvent event) {
+        final ItemStack firstItem = event.getInventory().getItem(0);
+        final ItemStack secondItem = event.getInventory().getItem(1);
+        if (firstItem == null || secondItem == null) {
+            return;
+        }
+        if (firstItem.getType() == Material.FIREWORK_ROCKET && firstItem.hasItemMeta() && firstItem.getItemMeta().hasLore() && firstItem.getItemMeta().getLore() != null && firstItem.getItemMeta().getLore().contains("123") && secondItem.getType() == Material.DIAMOND_BLOCK) {
+            final ItemStack result = new ItemStack(Material.FIREWORK_ROCKET, 1);
+            final ItemMeta meta = result.getItemMeta();
+            List<String> lore = new ArrayList<>();
+            lore.add("456");
+            meta.setLore(lore);
+            result.setItemMeta(meta);
+            event.setResult(result);
+        }
+    }
 }
