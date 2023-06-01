@@ -33,7 +33,7 @@ public final class main extends JavaPlugin {
 
         meta.setPower(1);
         im.setDisplayName("Чудо Фейверк");
-        im.setLore(Collections.singletonList("123"));
+        im.setLore(Collections.singletonList("1"));
         fireworkFly.setItemMeta(im);
 
         // Set firework power
@@ -42,6 +42,7 @@ public final class main extends JavaPlugin {
         fireworkFly.setItemMeta(fireworkMeta);
 
         ShapedRecipe recipe = new ShapedRecipe(key, fireworkFly);
+        //recipe.shape("AAA", "ABA", "AAA");
         recipe.shape("AB");
         recipe.setIngredient('A', Material.DIAMOND);
         recipe.setIngredient('B', Material.FIREWORK_ROCKET);
@@ -54,5 +55,3 @@ public final class main extends JavaPlugin {
         System.out.println("\u001B[31m" + "Doesn't work!" + "\u001B[0m");
     }
 }
-
-
