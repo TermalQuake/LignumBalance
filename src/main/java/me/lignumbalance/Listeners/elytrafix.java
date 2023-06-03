@@ -104,7 +104,7 @@ public class elytrafix implements Listener {
             fireworkMeta.setCustomModelData(100);
             result.setItemMeta(fireworkMeta); // Устанавливаем метаданные предмета
             event.setResult(result);
-            int repairCost = 10 * firstItemCount; // Устанавливаем стоимость ремонта, зависящую от количества первоначального предмета
+            int repairCost = 10 * firstItemCount; // Устанавливаем стоимость ремонта
             event.getInventory().setRepairCost(repairCost);
         }
     }
