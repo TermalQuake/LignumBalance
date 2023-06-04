@@ -47,7 +47,7 @@ public class elytrafix implements Listener {
             if (event.getAction() == Action.RIGHT_CLICK_AIR && event.getPlayer().isGliding()) {
                 if (meta.hasLore()) {
                     List<String> lore = meta.getLore();
-                    if (lore.contains("1") || lore.contains("2") || lore.contains("3")) {
+                    if (lore.contains("1. Можно летать") || lore.contains("2. Можно летать") || lore.contains("3. Можно летать")) {
                         event.setCancelled(false);
                         event.getPlayer().sendMessage(ChatColor.GREEN + "можно летать");
                     } else {
@@ -70,18 +70,19 @@ public class elytrafix implements Listener {
         if (firstItem == null || secondItem == null) {
             return;
         }
-        if (firstItem.getType() == Material.FIREWORK_ROCKET && firstItem.hasItemMeta() && firstItem.getItemMeta().hasLore() && firstItem.getItemMeta().getLore().contains("1") && secondItem.getType() == Material.BLAZE_POWDER) {
+        if (firstItem.getType() == Material.FIREWORK_ROCKET && firstItem.hasItemMeta() && firstItem.getItemMeta().hasLore() && firstItem.getItemMeta().getLore().contains("1. Можно летать") && secondItem.getType() == Material.BLAZE_POWDER) {
             int firstItemCount = firstItem.getAmount(); // Получаем количество первоначального предмета
             final ItemStack result = new ItemStack(Material.FIREWORK_ROCKET, firstItemCount); // Создаем новый предмет с количеством, равным количеству первоначального предмета
             final FireworkMeta fireworkMeta = (FireworkMeta) result.getItemMeta(); // Получаем метаданные предмета в виде FireworkMeta
             fireworkMeta.setPower(2); // Устанавливаем мощность фейерверка
             List<String> lore = new ArrayList<>();
-            lore.add("2");
+            fireworkMeta.setDisplayName("Чудо Фейверк");
+            lore.add("2. Можно летать");
             fireworkMeta.setLore(lore);
             fireworkMeta.setCustomModelData(100);
             result.setItemMeta(fireworkMeta); // Устанавливаем метаданные предмета
             event.setResult(result);
-            int repairCost = 10 * firstItemCount; // Устанавливаем стоимость ремонта, зависящую от количества первоначального предмета
+            int repairCost = 1; // Устанавливаем стоимость ремонта, зависящую от количества первоначального предмета
             event.getInventory().setRepairCost(repairCost);
         }
     }
@@ -93,18 +94,19 @@ public class elytrafix implements Listener {
         if (firstItem == null || secondItem == null) {
             return;
         }
-        if (firstItem.getType() == Material.FIREWORK_ROCKET && firstItem.hasItemMeta() && firstItem.getItemMeta().hasLore() && firstItem.getItemMeta().getLore().contains("2") && secondItem.getType() == Material.FIRE_CHARGE) {
+        if (firstItem.getType() == Material.FIREWORK_ROCKET && firstItem.hasItemMeta() && firstItem.getItemMeta().hasLore() && firstItem.getItemMeta().getLore().contains("2. Можно летать") && secondItem.getType() == Material.FIRE_CHARGE) {
             int firstItemCount = firstItem.getAmount(); // Получаем количество первоначального предмета
             final ItemStack result = new ItemStack(Material.FIREWORK_ROCKET, firstItemCount); // Создаем новый предмет с количеством, равным количеству первоначального предмета
             final FireworkMeta fireworkMeta = (FireworkMeta) result.getItemMeta(); // Получаем метаданные предмета в виде FireworkMeta
             fireworkMeta.setPower(3); // Устанавливаем мощность фейерверка
             List<String> lore = new ArrayList<>();
-            lore.add("3");
+            fireworkMeta.setDisplayName("Чудо Фейверк");
+            lore.add("3. Можно летать");
             fireworkMeta.setLore(lore);
             fireworkMeta.setCustomModelData(100);
             result.setItemMeta(fireworkMeta); // Устанавливаем метаданные предмета
             event.setResult(result);
-            int repairCost = 10 * firstItemCount; // Устанавливаем стоимость ремонта
+            int repairCost = 2; // Устанавливаем стоимость ремонта, зависящую от количества первоначального предмета
             event.getInventory().setRepairCost(repairCost);
         }
     }
