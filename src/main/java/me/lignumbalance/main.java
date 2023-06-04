@@ -33,7 +33,7 @@ public final class main extends JavaPlugin {
 
         meta.setPower(1);
         im.setDisplayName("Чудо Фейверк");
-        im.setLore(Collections.singletonList("1"));
+        im.setLore(Collections.singletonList("1. Можно летать"));
         fireworkFly.setItemMeta(im);
 
         // Set firework power
@@ -42,10 +42,12 @@ public final class main extends JavaPlugin {
         fireworkFly.setItemMeta(fireworkMeta);
 
         ShapedRecipe recipe = new ShapedRecipe(key, fireworkFly);
-        //recipe.shape("AAA", "ABA", "AAA");
-        recipe.shape("AB");
-        recipe.setIngredient('A', Material.DIAMOND);
-        recipe.setIngredient('B', Material.FIREWORK_ROCKET);
+        //recipe.shape("AAA", "ABA", "AAA"); //craft 8diamonds=1FR
+        recipe.shape("BGB", "GFG","BGB");
+        recipe.setIngredient('B', Material.BLAZE_POWDER);
+        recipe.setIngredient('G', Material.GUNPOWDER);
+        recipe.setIngredient('F', Material.FIREWORK_ROCKET);
+
         // Register craft
         getServer().addRecipe(recipe);
     }
